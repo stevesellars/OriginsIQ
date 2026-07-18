@@ -284,20 +284,20 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
     <span class="nav-wordmark">Origins<span class="iq">IQ</span></span>
   </a>
   <div class="nav-links">
-    <a href="#pain">The Problem</a>
-    <a href="#highlights">ExcursionsIQ</a>
+    <a href="#industries">Industries</a>
+    <a href="#portfolio">What We Build</a>
+    <a href="#eiq-deep">ExcursionsIQ</a>
     <a href="#consulting">Advisory</a>
-    <a href="#revenue">The Opportunity</a>
     <a href="#cta">Contact</a>
   </div>
   <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Request Briefing</button>
   <button class="nav-ham" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-drawer" id="drawer">
-  <a href="#pain" onclick="closeMenu()">The Problem</a>
-  <a href="#highlights" onclick="closeMenu()">ExcursionsIQ</a>
+  <a href="#industries" onclick="closeMenu()">Industries</a>
+  <a href="#portfolio" onclick="closeMenu()">What We Build</a>
+  <a href="#eiq-deep" onclick="closeMenu()">ExcursionsIQ</a>
   <a href="#consulting" onclick="closeMenu()">Advisory</a>
-  <a href="#revenue" onclick="closeMenu()">The Opportunity</a>
   <a href="#cta" onclick="closeMenu()">Contact</a>
   <button class="nd-cta" onclick="closeMenu();document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Request Briefing</button>
 </div>
@@ -307,21 +307,21 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
   <canvas id="heroCanvas"></canvas>
   <div class="hero-veil"></div>
   <div class="hero-content">
-    <div class="hero-badge"><span class="badge-dot"></span>Introducing ExcursionsIQ — by OriginsIQ</div>
+    <div class="hero-badge"><span class="badge-dot"></span>AI-native intelligence for the travel industry</div>
     <h1 class="hero-h1">
-      <span class="h1-bold">Every port.</span>
-      <span class="h1-accent">Every tour.</span>
-      <span class="h1-whisper">every opportunity — captured.</span>
+      <span class="h1-bold">Travel runs</span>
+      <span class="h1-accent">on intelligence.</span>
+      <span class="h1-whisper">we build the layer underneath.</span>
     </h1>
     <div style="display:flex;align-items:center;gap:14px;margin:22px 0 24px;opacity:0;animation:fadeUp 0.9s ease 0.82s forwards">
       <div style="height:1px;width:32px;background:rgba(59,130,246,0.35)"></div>
-      <span style="font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-lt)">AI-native travel intelligence</span>
+      <span style="font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-lt)">Cruise · Resorts · Tours · Excursions</span>
       <div style="height:1px;width:32px;background:rgba(59,130,246,0.35)"></div>
     </div>
-    <p class="hero-sub"><strong>OriginsIQ</strong> builds AI-native intelligence for the global travel industry. Our flagship product, <strong>ExcursionsIQ</strong>, runs the full lifecycle of cruise shore excursions — from port call to post-tour — so nothing falls through the cracks.</p>
+    <p class="hero-sub"><strong>OriginsIQ</strong> builds AI-native platforms for the global travel industry — cruise lines, resorts, tour operators, and shore excursion companies. Our flagship, <strong>ExcursionsIQ</strong>, is the first proof of what that intelligence looks like in production.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="document.getElementById('highlights').scrollIntoView({behavior:'smooth'})">See ExcursionsIQ →</button>
-      <button class="btn-outline" onclick="document.getElementById('pain').scrollIntoView({behavior:'smooth'})">Recognize These Problems?</button>
+      <button class="btn-primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">See What We're Building →</button>
+      <button class="btn-outline" onclick="document.getElementById('industries').scrollIntoView({behavior:'smooth'})">Our Industries</button>
     </div>
   </div>
   <div class="scroll-cue"><span class="scroll-label">Scroll</span><div class="scroll-bar"></div></div>
@@ -330,13 +330,134 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 <!-- TICKER -->
 <div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
 
-<!-- PAIN -->
-<div class="section pain-bg" id="pain">
+<!-- WORLD MAP -->
+<div class="world-visual" id="world">
+  <canvas id="worldCanvas"></canvas>
+  <div class="world-overlay">
+    <div class="world-text">
+      <div class="kicker teal sr">Global by design</div>
+      <h2 class="section-h sr" style="margin-bottom:14px">
+        <span class="sh-bold">One intelligence.</span>
+        <span class="sh-bold sh-accent">Every ocean.</span>
+      </h2>
+      <p class="wt-p sr">Caribbean to Mediterranean, Alaska to Southeast Asia — wherever travel happens, OriginsIQ operates alongside the businesses running it. Real-time. Always.</p>
+    </div>
+  </div>
+</div>
+
+<!-- INDUSTRIES STRIP -->
+<div class="section" id="industries">
   <div class="section-inner">
-    <div class="pain-top">
-      <div class="kicker rose sr">The reality out there</div>
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="kicker blue sr">Where we operate</div>
+      <h2 class="section-h sr" style="margin:0 auto">
+        <span class="sh-bold">One thesis.</span>
+        <span class="sh-italic sh-accent">Every vertical of travel.</span>
+      </h2>
+      <p class="section-p sr" style="max-width:560px;margin:16px auto 0">We're not building a tool for one corner of the industry. We're building the intelligence layer for all of it — starting where the complexity is highest.</p>
+    </div>
+    <div class="hl-grid">
+      <div class="hl-card sr">
+        <div class="hl-ico b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <div>
+          <div class="hc-title">Cruise & shore excursions</div>
+          <div class="hc-body">Our first vertical, and the proving ground for the platform. Port calls, capacity, allocation, guides, and vendors — running live today.</div>
+          <span class="hc-tag">Live via ExcursionsIQ →</span>
+        </div>
+      </div>
+      <div class="hl-card sr d1">
+        <div class="hl-ico t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div>
+          <div class="hc-title">Resorts & hospitality</div>
+          <div class="hc-body">Operational intelligence for resort operators where scheduling, capacity, and guest experience have to move in perfect synchrony.</div>
+          <span class="hc-tag">In development →</span>
+        </div>
+      </div>
+      <div class="hl-card sr d2">
+        <div class="hl-ico v"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div>
+          <div class="hc-title">Tour operators & brokers</div>
+          <div class="hc-body">Platforms for the intermediaries connecting cruise lines, resorts, guests, and ground operators — with full visibility across every relationship.</div>
+          <span class="hc-tag">In development →</span>
+        </div>
+      </div>
+      <div class="hl-card sr d3">
+        <div class="hl-ico r"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div>
+          <div class="hc-title">What's next</div>
+          <div class="hc-body">We're always in discovery mode. If your corner of travel runs on complexity and your software hasn't caught up, that's exactly where we want to work.</div>
+          <span class="hc-tag">Always exploring →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTFOLIO — WHAT WE BUILD -->
+<div class="section consult-bg" id="portfolio">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:52px">
+      <div class="kicker violet sr">What we're building</div>
+      <h2 class="section-h sr" style="margin:0 auto">
+        <span class="sh-bold">One company.</span>
+        <span class="sh-italic sh-violet">Four ways we show up.</span>
+      </h2>
+      <p class="section-p sr" style="max-width:580px;margin:16px auto 0">Products, engagements, and integrations — all built on the same intelligence thesis, deployed wherever the industry needs it most.</p>
+    </div>
+    <div class="hl-grid">
+      <div class="hl-card sr">
+        <div class="hl-ico b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <div class="hc-title">ExcursionsIQ — flagship product</div>
+          <div class="hc-body">The full lifecycle of cruise shore excursions, from port call to post-tour reconciliation. Live, in production, purpose-built for operators and brokers.</div>
+          <span class="hc-tag"><a href="#eiq-deep" style="color:inherit;text-decoration:none">See the platform in detail →</a></span>
+        </div>
+      </div>
+      <div class="hl-card sr d1">
+        <div class="hl-ico t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div>
+          <div class="hc-title">Tour intelligence — in development</div>
+          <div class="hc-body">A new way to rate, evaluate, and onboard tours across the industry — bringing structure and intelligence to a process that's always been manual and fragmented.</div>
+          <span class="hc-tag">Coming soon →</span>
+        </div>
+      </div>
+      <div class="hl-card sr d2">
+        <div class="hl-ico v"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div>
+          <div class="hc-title">Advisory & custom AI</div>
+          <div class="hc-body">We work directly with travel companies to design and deploy custom AI solutions — embedded into your existing operations, not bolted on top.</div>
+          <span class="hc-tag"><a href="#consulting" style="color:inherit;text-decoration:none">Learn about advisory →</a></span>
+        </div>
+      </div>
+      <div class="hl-card sr d3">
+        <div class="hl-ico r"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div>
+          <div class="hc-title">Integrations</div>
+          <div class="hc-body">OriginsIQ intelligence connects into the travel software you already run — booking engines, PMS, CRMs — and into ExcursionsIQ itself.</div>
+          <span class="hc-tag">Built to connect →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXCURSIONSIQ DEEP DIVE -->
+<div class="section" id="eiq-deep">
+  <div class="section-inner">
+    <div class="eiq-intro sr">
+      <div class="eiq-intro-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <div class="eiq-name">Excursions<span class="iq">IQ</span><span class="eiq-by">Our flagship, in detail</span></div>
+        <div class="eiq-desc">The world's first AI-native platform purpose-built for cruise shore excursion operators and brokers. End-to-end intelligence — from the first port call to post-tour reconciliation.</div>
+      </div>
+    </div>
+
+    <div class="pain-top" style="margin-bottom:48px">
+      <div class="kicker rose sr">The problem in this vertical</div>
       <h2 class="section-h sr">
-        <span class="sh-bold">The industry moves fast.</span>
+        <span class="sh-bold">Shore excursions move fast.</span>
         <span class="sh-italic">Most platforms don't.</span>
       </h2>
       <p class="section-p sr" style="margin-top:12px">Every missed alert, every manual spreadsheet, every last-minute scramble — it's not just friction. It's revenue walking off the gangway.</p>
@@ -379,43 +500,14 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
         <span class="pain-loss">Growth ceiling hit early</span>
       </div>
     </div>
-    <div class="solve-bar sr">
+    <div class="solve-bar sr" style="margin-bottom:52px">
       <div class="solve-arrow">→</div>
       <div>
         <div class="solve-st">ExcursionsIQ resolves all of it — automatically, in real time, from one platform.</div>
-        <div class="solve-sb">Built by OriginsIQ — AI-native infrastructure purpose-built for cruise operators, shore excursion companies, and broker partners.</div>
+        <div class="solve-sb">AI-native infrastructure purpose-built for cruise operators, shore excursion companies, and broker partners.</div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- WORLD MAP -->
-<div class="world-visual" id="world">
-  <canvas id="worldCanvas"></canvas>
-  <div class="world-overlay">
-    <div class="world-text">
-      <div class="kicker teal sr">Global by design</div>
-      <h2 class="section-h sr" style="margin-bottom:14px">
-        <span class="sh-bold">One platform.</span>
-        <span class="sh-bold sh-accent">Every ocean.</span>
-      </h2>
-      <p class="wt-p sr">Caribbean to Mediterranean, Alaska to Southeast Asia — wherever ships sail and tours run, ExcursionsIQ operates alongside you. Real-time. Always.</p>
-    </div>
-  </div>
-</div>
-
-<!-- EXCURSIONSIQ PLATFORM -->
-<div class="section" id="highlights">
-  <div class="section-inner">
-    <div class="eiq-intro sr">
-      <div class="eiq-intro-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <div>
-        <div class="eiq-name">Excursions<span class="iq">IQ</span><span class="eiq-by">by OriginsIQ</span></div>
-        <div class="eiq-desc">The world's first AI-native platform purpose-built for cruise shore excursion operators and brokers. End-to-end intelligence — from the first port call to post-tour reconciliation.</div>
-      </div>
-    </div>
     <div class="hl-head">
       <div>
         <div class="kicker blue sr">The platform</div>
@@ -570,10 +662,10 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
   <div class="cta-bloom"></div>
   <div style="position:relative;z-index:1">
     <h2 class="cta-h sr">
-      Stop leaving revenue<br>
-      <span class="italic">at the </span><span class="accent">dock.</span>
+      Let's build your<br>
+      <span class="italic">next chapter of </span><span class="accent">intelligence.</span>
     </h2>
-    <p class="cta-p sr">Request a briefing on ExcursionsIQ or our advisory practice. A real conversation about your operation — no pitch deck, no pressure.</p>
+    <p class="cta-p sr">Whether it's ExcursionsIQ, a custom advisory engagement, or something we haven't built yet — request a briefing. A real conversation about your operation, no pitch deck, no pressure.</p>
     <div class="cta-form sr">
       <input type="email" placeholder="your@company.com" id="ctaEmail"/>
       <button onclick="submitCTA()">Request Briefing →</button>
