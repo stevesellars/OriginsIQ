@@ -921,11 +921,22 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')})},{threshold:0.07,rootMargin:'0px 0px -16px 0px'});
 document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
 
-/* ── CTA ── */
+/* ── CTA — opens visitor's email client, pre-filled, sent to real inbox ── */
 function submitCTA(){
   const i=document.getElementById('ctaEmail');
-  if(!i.value.includes('@')){i.style.outline='1px solid rgba(224,57,106,0.7)';setTimeout(()=>i.style.outline='',1500);return}
-  i.value='';i.placeholder="We'll be in touch soon.";setTimeout(()=>i.placeholder='your@company.com',4000);
+  const visitorEmail=i.value.trim();
+  if(!visitorEmail.includes('@')){i.style.outline='1px solid rgba(224,57,106,0.7)';setTimeout(()=>i.style.outline='',1500);return}
+
+  const to='eiqplatform@selernagroup.com'; // ← update to your preferred inbox
+  const subject=encodeURIComponent('Briefing Request — OriginsIQ');
+  const body=encodeURIComponent(
+    `Hi OriginsIQ team,\n\nI'd like to request a briefing.\n\nMy email: ${visitorEmail}\n\n(Please let me know your availability.)\n`
+  );
+  window.location.href=`mailto:${to}?subject=${subject}&body=${body}`;
+
+  i.style.outline='1px solid rgba(0,196,168,0.6)';
+  i.value='';i.placeholder="Opening your email app…";
+  setTimeout(()=>{i.style.outline='';i.placeholder='your@company.com'},4000);
 }
 document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
 </script>
