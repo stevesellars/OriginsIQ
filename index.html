@@ -3,7 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OriginsIQ — Home of ExcursionsIQ</title>
+<title>OriginsIQ — AI-Native Travel Intelligence</title>
+<meta name="description" content="OriginsIQ builds AI-native intelligence for the global travel industry — cruise, resorts, tours, and shore excursions. Home of ExcursionsIQ.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-56 -56 112 112'%3E%3Crect x='-56' y='-56' width='112' height='112' rx='24' fill='%230F1E35'/%3E%3Ccircle cx='0' cy='0' r='42' fill='none' stroke='white' stroke-width='9'/%3E%3Ccircle cx='-16' cy='-14' r='9' fill='%233B82F6'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-56 -56 112 112'%3E%3Crect x='-56' y='-56' width='112' height='112' rx='24' fill='%230F1E35'/%3E%3Ccircle cx='0' cy='0' r='42' fill='none' stroke='white' stroke-width='9'/%3E%3Ccircle cx='-16' cy='-14' r='9' fill='%233B82F6'/%3E%3C/svg%3E">
+
+<!-- Open Graph — controls link preview title/description when shared -->
+<meta property="og:title" content="OriginsIQ — AI-Native Travel Intelligence">
+<meta property="og:description" content="AI-native intelligence for the global travel industry — cruise, resorts, tours, and shore excursions. Home of ExcursionsIQ.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OriginsIQ">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OriginsIQ — AI-Native Travel Intelligence">
+<meta name="twitter:description" content="AI-native intelligence for the global travel industry — cruise, resorts, tours, and shore excursions. Home of ExcursionsIQ.">
+
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700;1,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -101,6 +118,16 @@ nav.solid{background:rgba(15,30,53,0.95);backdrop-filter:blur(20px);border-botto
 .kicker.blue{color:var(--blue-lt)}
 .kicker.violet{color:var(--violet-lt)}
 .kicker.gold{color:var(--violet-lt)}
+
+/* CHAPTER-BREAK VERTICAL MARKER — for major section transitions within a deep-dive */
+.vertical-marker{display:flex;align-items:center;gap:20px;margin-bottom:28px}
+.vm-line{height:1px;flex:1;max-width:64px;background:linear-gradient(90deg,transparent,var(--rose),transparent)}
+.vm-text{font-family:'DM Mono',monospace;font-size:clamp(13px,1.8vw,16px);font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose);white-space:nowrap;flex-shrink:0}
+@media(max-width:600px){
+  .vertical-marker{flex-direction:column;gap:10px;text-align:center}
+  .vm-line{max-width:100%;width:60px;flex:none}
+  .vm-text{white-space:normal;text-align:center}
+}
 /* THREE-VOICE SECTION HEADLINE SYSTEM */
 .section-h{margin-bottom:16px}
 .sh-bold{display:block;font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:clamp(30px,4.5vw,54px);letter-spacing:-1.5px;line-height:1.02;color:var(--white);padding-bottom:0.05em}
@@ -455,7 +482,11 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
     </div>
 
     <div class="pain-top" style="margin-bottom:48px">
-      <div class="kicker rose sr">The problem in this vertical</div>
+      <div class="vertical-marker sr">
+        <div class="vm-line"></div>
+        <span class="vm-text">The problem in this vertical</span>
+        <div class="vm-line"></div>
+      </div>
       <h2 class="section-h sr">
         <span class="sh-bold">Shore excursions move fast.</span>
         <span class="sh-italic">Most platforms don't.</span>
