@@ -186,7 +186,7 @@ nav.solid{background:rgba(15,30,53,0.95);backdrop-filter:blur(20px);border-botto
 .hl-card.wide .hc-tag{color:var(--violet-lt)}
 
 /* ── CONSULTING SECTION ── */
-.consult-bg{background:var(--ink3);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.consult-bg{position:relative;overflow:hidden;background:var(--ink3);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .consult-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
 .consult-cards{display:flex;flex-direction:column;gap:14px}
 .consult-card{background:var(--ink2);border:1px solid var(--border);border-radius:12px;padding:22px 24px;display:flex;gap:16px;align-items:flex-start;transition:all 0.22s;position:relative;overflow:hidden}
@@ -197,8 +197,56 @@ nav.solid{background:rgba(15,30,53,0.95);backdrop-filter:blur(20px);border-botto
 .cc-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:3px;letter-spacing:-0.1px}
 .cc-body{font-size:13px;color:var(--white3);line-height:1.65}
 
+/* ── SECTION TEXTURES — purposeful, tied to section meaning, pure CSS ── */
+.tex-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
+
+/* PORTFOLIO — faint blueprint/schematic grid + corner brackets: "systems, architecture, multiple products" */
+.tex-portfolio{
+  background-image:
+    linear-gradient(rgba(139,92,246,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,246,0.05) 1px,transparent 1px),
+    linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);
+  background-size:88px 88px,88px 88px,22px 22px,22px 22px;
+  mask-image:radial-gradient(ellipse 90% 75% at 50% 40%,black 0%,transparent 80%);
+  animation:gridDrift 40s linear infinite;
+}
+@keyframes gridDrift{0%{background-position:0 0,0 0,0 0,0 0}100%{background-position:88px 88px,88px 88px,22px 22px,22px 22px}}
+
+/* CONSULTING — soft diagonal hatch, like a draftsman's working sketch: "custom, built by hand, bespoke" */
+.tex-consulting{
+  background-image:repeating-linear-gradient(135deg,rgba(185,157,255,0.04) 0px,rgba(185,157,255,0.04) 1px,transparent 1px,transparent 26px);
+  mask-image:linear-gradient(180deg,black 0%,transparent 90%);
+  animation:hatchDrift 50s linear infinite;
+}
+@keyframes hatchDrift{0%{background-position:0 0}100%{background-position:368px 368px}}
+
+/* REVENUE — rising bar-chart silhouette ghosted at the base: "growth, opportunity, upward" */
+.tex-revenue{
+  background-image:linear-gradient(0deg,rgba(0,196,168,0.05) 0%,transparent 45%);
+}
+.tex-revenue-bars{position:absolute;bottom:0;left:0;right:0;height:45%;display:flex;align-items:flex-end;gap:clamp(8px,2vw,20px);padding:0 var(--pad);opacity:0.5}
+.tex-revenue-bars span{flex:1;max-width:64px;background:linear-gradient(180deg,rgba(0,196,168,0.14),rgba(59,130,246,0.05));border-radius:3px 3px 0 0;animation:barBreathe 4.5s ease-in-out infinite;transform-origin:bottom}
+.tex-revenue-bars span:nth-child(odd){animation-duration:5.2s}
+.tex-revenue-bars span:nth-child(3n){animation-delay:-1.5s}
+.tex-revenue-bars span:nth-child(4n){animation-delay:-3s}
+@keyframes barBreathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.06)}}
+
+/* MANIFESTO — soft concentric rings from center: "origin, the idea radiating outward" — echoes the logo mark */
+.tex-manifesto{
+  background:repeating-radial-gradient(circle at 50% 45%,transparent 0,transparent 68px,rgba(126,179,255,0.025) 69px,rgba(126,179,255,0.025) 70px);
+  animation:ringBreathe 8s ease-in-out infinite;
+}
+@keyframes ringBreathe{0%,100%{background-size:100% 100%;opacity:0.7}50%{background-size:106% 106%;opacity:1}}
+
+/* CTA — quiet upward light column behind the button: draws the eye down, "the way forward" */
+.tex-cta{background:radial-gradient(ellipse 60% 55% at 50% 100%,rgba(59,130,246,0.09) 0%,transparent 70%)}
+
+.consult-bg .section-inner{position:relative;z-index:1}
+
 /* ── REVENUE ── */
-.rev-bg{background:linear-gradient(135deg,var(--ink2) 0%,var(--slate) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.rev-bg{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--ink2) 0%,var(--slate) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.rev-bg .section-inner{position:relative;z-index:1}
 .rev-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
 .rev-stats{display:flex;flex-direction:column;gap:14px}
 .rev-stat{background:rgba(15,30,53,0.7);border:1px solid var(--border);border-radius:12px;padding:20px 22px;display:flex;gap:18px;align-items:center;transition:all 0.22s}
@@ -422,6 +470,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 
 <!-- PORTFOLIO — WHAT WE BUILD -->
 <div class="section consult-bg" id="portfolio">
+  <div class="tex-bg tex-portfolio"></div>
   <div class="section-inner">
     <div style="text-align:center;margin-bottom:52px">
       <div class="kicker violet sr">What we're building</div>
@@ -596,6 +645,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 
 <!-- CONSULTING / ADVISORY -->
 <div class="section consult-bg" id="consulting">
+  <div class="tex-bg tex-consulting"></div>
   <div class="section-inner">
     <div class="consult-inner">
       <div>
@@ -643,6 +693,13 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 
 <!-- REVENUE -->
 <div class="section rev-bg" id="revenue">
+  <div class="tex-bg tex-revenue"></div>
+  <div class="tex-revenue-bars" aria-hidden="true">
+    <span style="height:30%"></span><span style="height:48%"></span><span style="height:38%"></span>
+    <span style="height:62%"></span><span style="height:52%"></span><span style="height:74%"></span>
+    <span style="height:66%"></span><span style="height:86%"></span><span style="height:78%"></span>
+    <span style="height:96%"></span>
+  </div>
   <div class="section-inner">
     <div class="rev-inner">
       <div>
@@ -677,6 +734,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 
 <!-- MANIFESTO -->
 <div class="manifesto">
+  <div class="tex-bg tex-manifesto"></div>
   <div class="mani-glow"></div>
   <div class="mani-grid"></div>
   <div style="position:relative;z-index:1">
@@ -690,6 +748,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 
 <!-- CTA -->
 <div class="cta-section" id="cta">
+  <div class="tex-bg tex-cta"></div>
   <div class="cta-bloom"></div>
   <div style="position:relative;z-index:1">
     <h2 class="cta-h sr">
@@ -939,6 +998,174 @@ function submitCTA(){
   setTimeout(()=>{i.style.outline='';i.placeholder='your@company.com'},4000);
 }
 document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+
+/* ──────────────────────────────
+   AMBIENT BACKGROUND CANVASES
+   Lightweight, low-opacity, pause when off-screen
+   ────────────────────────────── */
+(function(){
+  const registry=[];
+
+  function makeCanvas(id, drawFn){
+    const c=document.getElementById(id);
+    if(!c) return;
+    const ctx=c.getContext('2d');
+    let W,H,running=false,raf=null;
+    function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+    function loop(t){
+      if(!running) return;
+      drawFn(ctx,W,H,t);
+      raf=requestAnimationFrame(loop);
+    }
+    resize();
+    window.addEventListener('resize',resize);
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !running){running=true;raf=requestAnimationFrame(loop)}
+        else if(!e.isIntersecting && running){running=false;if(raf)cancelAnimationFrame(raf)}
+      });
+    },{threshold:0.05});
+    io.observe(c);
+    registry.push({c,ctx});
+  }
+
+  /* 1 — PORTFOLIO: constellation network — dots + connecting lines forming/dissolving */
+  makeCanvas('portfolioCanvas', (function(){
+    let nodes=null;
+    return function(ctx,W,H,t){
+      if(!nodes || nodes._w!==W){
+        nodes=Array.from({length:16},()=>({
+          x:Math.random()*W,y:Math.random()*H,
+          vx:(Math.random()-0.5)*0.12,vy:(Math.random()-0.5)*0.12,
+          r:1.2+Math.random()*1.6
+        }));
+        nodes._w=W;
+      }
+      ctx.clearRect(0,0,W,H);
+      nodes.forEach(n=>{
+        n.x+=n.vx;n.y+=n.vy;
+        if(n.x<0||n.x>W)n.vx*=-1;
+        if(n.y<0||n.y>H)n.vy*=-1;
+      });
+      for(let i=0;i<nodes.length;i++){
+        for(let j=i+1;j<nodes.length;j++){
+          const a=nodes[i],b=nodes[j];
+          const d=Math.hypot(a.x-b.x,a.y-b.y);
+          if(d<170){
+            ctx.strokeStyle=`rgba(139,92,246,${(1-d/170)*0.12})`;
+            ctx.lineWidth=1;
+            ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+          }
+        }
+      }
+      nodes.forEach((n,i)=>{
+        const pulse=0.6+0.4*Math.sin(t*0.0006+i);
+        ctx.fillStyle=`rgba(126,179,255,${0.35*pulse})`;
+        ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fill();
+      });
+    };
+  })());
+
+  /* 2 — CONSULTING: slow drifting particle field, violet-tinted */
+  makeCanvas('consultingCanvas', (function(){
+    let parts=null;
+    return function(ctx,W,H,t){
+      if(!parts || parts._w!==W){
+        parts=Array.from({length:26},()=>({
+          x:Math.random()*W,y:Math.random()*H,
+          vy:-0.08-Math.random()*0.1,
+          r:0.8+Math.random()*1.8,
+          alpha:0.15+Math.random()*0.25,
+          phase:Math.random()*Math.PI*2
+        }));
+        parts._w=W;
+      }
+      ctx.clearRect(0,0,W,H);
+      parts.forEach(p=>{
+        p.y+=p.vy;
+        if(p.y<-10){p.y=H+10;p.x=Math.random()*W}
+        const shimmer=0.6+0.4*Math.sin(t*0.0008+p.phase);
+        ctx.fillStyle=`rgba(185,157,255,${p.alpha*shimmer})`;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+      });
+    };
+  })());
+
+  /* 3 — REVENUE: ascending light trails, teal/blue — suggests growth */
+  makeCanvas('revenueCanvas', (function(){
+    let trails=null;
+    return function(ctx,W,H,t){
+      if(!trails || trails._w!==W){
+        trails=Array.from({length:9},()=>({
+          x:Math.random()*W,
+          y:H+Math.random()*H*0.5,
+          speed:0.25+Math.random()*0.35,
+          len:40+Math.random()*70,
+          alpha:0.08+Math.random()*0.1,
+          hue: Math.random()>0.5 ? 'rgba(0,196,168,' : 'rgba(59,130,246,'
+        }));
+        trails._w=W;
+      }
+      ctx.clearRect(0,0,W,H);
+      trails.forEach(tr=>{
+        tr.y-=tr.speed;
+        if(tr.y<-tr.len){tr.y=H+Math.random()*80;tr.x=Math.random()*W}
+        const grad=ctx.createLinearGradient(tr.x,tr.y,tr.x,tr.y+tr.len);
+        grad.addColorStop(0,'transparent');
+        grad.addColorStop(0.6,tr.hue+tr.alpha+')');
+        grad.addColorStop(1,'transparent');
+        ctx.strokeStyle=grad;
+        ctx.lineWidth=1.4;
+        ctx.beginPath();ctx.moveTo(tr.x,tr.y);ctx.lineTo(tr.x,tr.y+tr.len);ctx.stroke();
+      });
+    };
+  })());
+
+  /* 4 — MANIFESTO: slow floating light orbs, soft depth */
+  makeCanvas('manifestoCanvas', (function(){
+    let orbs=null;
+    return function(ctx,W,H,t){
+      if(!orbs || orbs._w!==W){
+        orbs=Array.from({length:5},()=>({
+          x:Math.random()*W,y:Math.random()*H,
+          r:60+Math.random()*100,
+          vx:(Math.random()-0.5)*0.06,vy:(Math.random()-0.5)*0.06,
+          hue: ['rgba(59,130,246,','rgba(0,196,168,','rgba(139,92,246,'][Math.floor(Math.random()*3)],
+          alpha:0.035+Math.random()*0.04
+        }));
+        orbs._w=W;
+      }
+      ctx.clearRect(0,0,W,H);
+      orbs.forEach(o=>{
+        o.x+=o.vx;o.y+=o.vy;
+        if(o.x<-o.r||o.x>W+o.r)o.vx*=-1;
+        if(o.y<-o.r||o.y>H+o.r)o.vy*=-1;
+        const g=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);
+        g.addColorStop(0,o.hue+o.alpha+')');
+        g.addColorStop(1,'transparent');
+        ctx.fillStyle=g;
+        ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,Math.PI*2);ctx.fill();
+      });
+    };
+  })());
+
+  /* 5 — CTA: quiet breathing pulse field, draws eye to center */
+  makeCanvas('ctaCanvas', function(ctx,W,H,t){
+    ctx.clearRect(0,0,W,H);
+    const cx=W/2,cy=H*0.55;
+    const breathe=0.5+0.5*Math.sin(t*0.0007);
+    for(let i=0;i<3;i++){
+      const r=(120+i*90)+breathe*30;
+      const alpha=(0.05-i*0.014)*(0.6+0.4*breathe);
+      const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+      g.addColorStop(0,`rgba(59,130,246,${alpha})`);
+      g.addColorStop(0.6,`rgba(139,92,246,${alpha*0.6})`);
+      g.addColorStop(1,'transparent');
+      ctx.fillStyle=g;
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+    }
+  });
+})();
 </script>
 </body>
 </html>
