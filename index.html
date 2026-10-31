@@ -388,6 +388,9 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 .nav-links a.eiq-launch{color:#fff}
 .eiq-live-dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:eiqBlink 1.8s ease-in-out infinite}
 @keyframes eiqBlink{0%,100%{opacity:1}50%{opacity:.35}}
+/* mobile fix: the closed menu was invisible but still caught taps (blocked the email box) */
+.nav-drawer{visibility:hidden;pointer-events:none;transition:transform .3s ease,opacity .3s ease,visibility .3s}
+.nav-drawer.open{visibility:visible;pointer-events:auto}
 /* thank-you popup (flat, no shadows) */
 .thanks-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(10,20,36,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
 .thanks-modal.open{opacity:1;visibility:visible}
