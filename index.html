@@ -1083,6 +1083,20 @@ window.addEventListener('click',e=>{const n=document.getElementById('nav'),d=doc
   const waves=[{y:0.672,amp:10,freq:0.009,spd:0.35,r:90,g:148,b:215,a:0.2},{y:0.692,amp:7,freq:0.013,spd:0.5,r:70,g:130,b:205,a:0.15},{y:0.718,amp:13,freq:0.007,spd:0.25,r:55,g:112,b:195,a:0.12},{y:0.748,amp:6,freq:0.016,spd:0.62,r:38,g:92,b:182,a:0.09}];
   const clouds=Array.from({length:7},()=>({x:Math.random(),y:0.08+Math.random()*0.28,w:0.09+Math.random()*0.2,h:0.03+Math.random()*0.06,spd:0.000018+Math.random()*0.000025,alpha:0.12+Math.random()*0.16}));
   const ships=[{x:0.21,y:0.665,sc:1.3,a:0.3},{x:0.67,y:0.661,sc:0.78,a:0.18},{x:0.85,y:0.668,sc:0.5,a:0.12}];
+  const shipV=[0.000336,0.00024,0.000176];
+  const plane={x:-0.2,y:0.09,wait:200};
+  function drawPlane(cx,cy,sc,al){
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(-0.05);ctx.globalAlpha=al;
+    const L=ctx.createLinearGradient(-230*sc,0,-14*sc,0);L.addColorStop(0,'rgba(255,255,255,0)');L.addColorStop(1,'rgba(255,255,255,0.55)');
+    ctx.fillStyle=L;ctx.fillRect(-230*sc,-1.1*sc,216*sc,2.2*sc);
+    ctx.fillStyle='#F2F7FF';
+    ctx.beginPath();ctx.ellipse(0,0,17*sc,2.6*sc,0,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.moveTo(-12*sc,-1*sc);ctx.lineTo(-19*sc,-10*sc);ctx.lineTo(-13*sc,-10*sc);ctx.lineTo(-6*sc,-1*sc);ctx.closePath();ctx.fill();
+    ctx.beginPath();ctx.moveTo(4*sc,1*sc);ctx.lineTo(-7*sc,10*sc);ctx.lineTo(-2*sc,10*sc);ctx.lineTo(9*sc,1*sc);ctx.closePath();ctx.fill();
+    ctx.fillStyle='rgba(90,120,170,0.7)';for(let i=0;i<6;i++){ctx.fillRect((-9+i*3.2)*sc,-1.2*sc,1.6*sc,1.2*sc)}
+    if(Math.sin(t*9)>0.2){ctx.fillStyle='#ff5d5d';ctx.beginPath();ctx.arc(-6*sc,10*sc,1.3*sc,0,Math.PI*2);ctx.fill()}
+    ctx.restore();
+  }
   function drawShip(cx,cy,sc,al){
     ctx.save();ctx.globalAlpha=al;ctx.fillStyle='#112D4B';
     const s=sc;
@@ -1164,7 +1178,9 @@ window.addEventListener('click',e=>{const n=document.getElementById('nav'),d=doc
     ctx.fillRect(W*.78,hy-18,W*.22,18);ctx.fillRect(W*.82,hy-38,W*.14,20);
     drawCrane(W*.065,hy,0.82,0.4);drawCrane(W*.112,hy,0.58,0.26);
     drawCrane(W*.855,hy,0.7,0.3);drawCrane(W*.905,hy,0.46,0.19);
-    ships.forEach(s=>drawShip(s.x*W,s.y*H,s.sc,s.a));
+    ships.forEach((s,i)=>{s.x+=shipV[i];if(s.x>1.15)s.x=-0.15;drawShip(s.x*W,s.y*H,s.sc,s.a)});
+    if(plane.wait>0){plane.wait--}else{plane.x+=0.00128;plane.y-=0.00001;if(plane.x>1.25){plane.x=-0.3;plane.y=0.085+Math.random()*0.03;plane.wait=500+Math.floor(Math.random()*500)}
+      const pa=Math.min(1,Math.min(plane.x+0.1,1.2-plane.x)*4);if(pa>0)drawPlane(plane.x*W,plane.y*H,Math.max(0.8,W/1100),Math.max(0,pa))}
     /* birds */
     birds.forEach(b=>{
       b.x=(b.x+b.spd)%1.3;if(b.x>1.2)b.x=-0.1;b.flap+=b.fspd;
@@ -1197,7 +1213,8 @@ window.addEventListener('click',e=>{const n=document.getElementById('nav'),d=doc
     {x:0.16,y:0.33,r:2.5,c:'#00C4A8'},{x:0.73,y:0.43,r:3.5,c:'#5C9EFF'},{x:0.78,y:0.41,r:3,c:'#5C9EFF'},
     {x:0.75,y:0.47,r:2.8,c:'#8B5CF6'},{x:0.30,y:0.60,r:2.5,c:'#00C4A8'},{x:0.78,y:0.62,r:3,c:'#5C9EFF'},{x:0.82,y:0.60,r:2.5,c:'#00C4A8'},
   ];
-  const movingShips=routes.slice(0,8).map(r=>({route:r,progress:Math.random(),spd:0.0008+Math.random()*.0006}));
+  const movingShips=routes.slice(0,8).map(r=>({route:r,progress:Math.random(),spd:0.00112+Math.random()*.0008}));
+  const mplane={p:0.2};
   function lerp(a,b,t){return a+(b-a)*t}
   function drawArc(from,to,color){
     const fx=from[0]*W,fy=from[1]*H,tx=to[0]*W,ty=to[1]*H;
@@ -1230,6 +1247,19 @@ window.addEventListener('click',e=>{const n=document.getElementById('nav'),d=doc
       ctx.fillStyle=sg;ctx.beginPath();ctx.arc(sx,sy,8,0,Math.PI*2);ctx.fill();
       ctx.fillStyle='#B99DFF';ctx.beginPath();ctx.arc(sx,sy,2.5,0,Math.PI*2);ctx.fill();
     });
+    /* plane on the map */
+    mplane.p+=0.0028;if(mplane.p>1.35)mplane.p=-0.1;
+    if(mplane.p>0&&mplane.p<1){
+      const a=[0.30,0.44],b=[0.52,0.36],fx=a[0]*W,fy=a[1]*H,tx=b[0]*W,ty=b[1]*H,mx=(fx+tx)/2,my=(fy+ty)/2,dx=tx-fx,dy=ty-fy,cpx=mx+dy*.3-30,cpy=my-dx*.3-40,p=mplane.p;
+      const px=lerp(lerp(fx,cpx,p),lerp(cpx,tx,p),p),py=lerp(lerp(fy,cpy,p),lerp(cpy,ty,p),p);
+      const tx2=2*(1-p)*(cpx-fx)+2*p*(tx-cpx),ty2=2*(1-p)*(cpy-fy)+2*p*(ty-cpy),ang=Math.atan2(ty2,tx2);
+      ctx.save();ctx.translate(px,py);ctx.rotate(ang);ctx.fillStyle='#FFFFFF';
+      ctx.beginPath();ctx.ellipse(0,0,9,1.8,0,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.moveTo(2,0.8);ctx.lineTo(-4,7);ctx.lineTo(-1,7);ctx.lineTo(5,0.8);ctx.closePath();ctx.fill();
+      ctx.beginPath();ctx.moveTo(2,-0.8);ctx.lineTo(-4,-7);ctx.lineTo(-1,-7);ctx.lineTo(5,-0.8);ctx.closePath();ctx.fill();
+      ctx.beginPath();ctx.moveTo(-7,0);ctx.lineTo(-10,-4);ctx.lineTo(-8,-4);ctx.lineTo(-5,0);ctx.closePath();ctx.fill();
+      ctx.restore();
+    }
     portDots.forEach((p,i)=>{
       const px=p.x*W,py=p.y*H,pulse=0.5+0.5*Math.sin(t*1.2+i*0.8);
       ctx.strokeStyle=p.c+'44';ctx.lineWidth=1;ctx.beginPath();ctx.arc(px,py,p.r+3+pulse*4,0,Math.PI*2);ctx.stroke();
