@@ -414,6 +414,22 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 .eiq-intro>*{position:relative;z-index:1}
 .eiq-intro .eiq-launch{margin-left:auto}
 @media(max-width:768px){.eiq-intro .eiq-launch{margin-left:0}}
+/* flagship card — stronger, readable */
+.eiq-intro{padding:36px 40px;gap:28px;border-radius:18px;border:1px solid rgba(126,179,255,.55);background:linear-gradient(110deg,rgba(59,130,246,.20),rgba(139,92,246,.16))}
+.eiq-intro::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#4f93ff,#8B5CF6)}
+.eiq-intro-icon{width:72px;height:72px;min-width:72px;border-radius:18px}
+.eiq-intro-icon svg{width:32px;height:32px}
+.eiq-name{font-size:38px;line-height:1.1;margin-bottom:12px;letter-spacing:-0.5px}
+.eiq-by{display:inline-block;font-size:11px;letter-spacing:.14em;color:#A9CBFF;background:rgba(59,130,246,.16);border:1px solid rgba(126,179,255,.5);border-radius:999px;padding:5px 12px;margin-left:16px;position:relative;top:-4px}
+.eiq-desc{font-size:17px;line-height:1.6;color:#DCE6F5;max-width:640px}
+.eiq-desc b{color:#fff;font-weight:600}
+@media(max-width:768px){
+  .eiq-intro{padding:28px 22px 26px 26px;gap:16px}
+  .eiq-intro-icon{width:56px;height:56px;min-width:56px}
+  .eiq-name{font-size:30px}
+  .eiq-by{display:table;margin:10px 0 0;top:0}
+  .eiq-desc{font-size:16px}
+}
 @media(prefers-reduced-motion:reduce){.eiq-launch::after,.eiq-live-dot{animation:none}}
 </style>
 </head>
@@ -621,7 +637,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
       </div>
       <div>
         <div class="eiq-name">Excursions<span class="iq">IQ</span><span class="eiq-by">Our flagship, in detail</span></div>
-        <div class="eiq-desc">The world's first AI-native platform purpose-built for cruise shore excursion operators and brokers. End-to-end intelligence — from the first port call to post-tour reconciliation.</div>
+        <div class="eiq-desc"><b>The world's first AI-native platform</b> purpose-built for cruise shore excursion operators and brokers. End-to-end intelligence — from the first port call to post-tour reconciliation.</div>
       </div>
       <a href="https://www.excursionsiq.com" target="_blank" rel="noopener" class="eiq-launch md"><span class="lbl">Enter ExcursionsIQ <span>→</span></span></a>
     </div>
