@@ -388,6 +388,17 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 .nav-links a.eiq-launch{color:#fff}
 .eiq-live-dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:eiqBlink 1.8s ease-in-out infinite}
 @keyframes eiqBlink{0%,100%{opacity:1}50%{opacity:.35}}
+/* thank-you popup (flat, no shadows) */
+.thanks-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(10,20,36,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.thanks-modal.open{opacity:1;visibility:visible}
+.thanks-card{width:100%;max-width:440px;background:var(--ink2);border:1px solid var(--border2);border-radius:18px;padding:44px 36px 36px;text-align:center;transform:translateY(14px) scale(.97);transition:transform .3s ease}
+.thanks-modal.open .thanks-card{transform:none}
+.thanks-ico{width:56px;height:56px;margin:0 auto 22px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center}
+.thanks-card h3{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:28px;letter-spacing:-.3px;color:var(--white);margin-bottom:12px}
+.thanks-card p{font-size:15px;line-height:1.65;color:var(--white2);margin-bottom:28px}
+.thanks-close{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;color:#fff;background:linear-gradient(110deg,var(--blue),#5a9fff);border:none;border-radius:999px;padding:13px 34px;cursor:pointer;transition:filter .2s}
+.thanks-close:hover{filter:brightness(1.12)}
+@media(prefers-reduced-motion:reduce){.thanks-modal,.thanks-card{transition:none}}
 .nav-eiq{position:relative;display:inline-flex}
 .nav-eiq .caret{font-size:9px;opacity:.85}
 .nav-eiq-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(4px);padding-top:12px;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;z-index:5}
@@ -841,6 +852,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
     <p class="cta-p sr">Whether it's ExcursionsIQ, a custom advisory engagement, or something we haven't built yet — request a briefing. A real conversation about your operation, no pitch deck, no pressure.</p>
     <div class="cta-form sr">
       <input type="email" placeholder="your@company.com" id="ctaEmail"/>
+      <input type="checkbox" name="botcheck" id="ctaHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button onclick="submitCTA()">Request Briefing →</button>
     </div>
     <p class="cta-note sr">OriginsIQ — AI-native travel intelligence &nbsp;·&nbsp; Home of ExcursionsIQ</p>
@@ -868,6 +880,15 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
   </div>
   <div class="f-copy">© 2026 OriginasIQ</div>
 </footer>
+<div class="thanks-modal" id="thanksModal" role="dialog" aria-modal="true" aria-labelledby="thanksTitle" aria-hidden="true">
+  <div class="thanks-card">
+    <div class="thanks-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <h3 id="thanksTitle">Thank you.</h3>
+    <p>Your briefing request has been received. We'll be in touch shortly.</p>
+    <button type="button" class="thanks-close" id="thanksClose">Close</button>
+  </div>
+</div>
+
 
 <script>
 /* ── MOBILE MENU ── */
@@ -1063,23 +1084,45 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')})},{threshold:0.07,rootMargin:'0px 0px -16px 0px'});
 document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
 
-/* ── CTA — opens visitor's email client, pre-filled, sent to real inbox ── */
-function submitCTA(){
+/* ── CTA — sends the request straight to your inbox via Web3Forms (works on every phone) ──
+   The access key below is a public key by design; it can only deliver to the inbox set up in your Web3Forms account. */
+const WEB3FORMS_KEY='87742fdf-7ee3-45dc-8000-f0c6fc639c99';
+async function submitCTA(){
   const i=document.getElementById('ctaEmail');
+  const btn=document.querySelector('.cta-form button');
   const visitorEmail=i.value.trim();
-  if(!visitorEmail.includes('@')){i.style.outline='1px solid rgba(224,57,106,0.7)';setTimeout(()=>i.style.outline='',1500);return}
-
-  const to='eiqplatform@selernagroup.com'; // ← update to your preferred inbox
-  const subject=encodeURIComponent('Briefing Request — OriginsIQ');
-  const body=encodeURIComponent(
-    `Hi OriginsIQ team,\n\nI'd like to request a briefing.\n\nMy email: ${visitorEmail}\n\n(Please let me know your availability.)\n`
-  );
-  window.location.href=`mailto:${to}?subject=${subject}&body=${body}`;
-
-  i.style.outline='1px solid rgba(0,196,168,0.6)';
-  i.value='';i.placeholder="Opening your email app…";
-  setTimeout(()=>{i.style.outline='';i.placeholder='your@company.com'},4000);
+  const flash=(c)=>{i.style.outline='1px solid '+c;setTimeout(()=>i.style.outline='',2500)};
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(visitorEmail)){flash('rgba(224,57,106,0.7)');i.focus();return}
+  btn.disabled=true;
+  try{
+    const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:'Briefing Request — OriginsIQ',from_name:'OriginsIQ Website',email:visitorEmail,
+        message:'Briefing request from the OriginsIQ website.\n\nVisitor email: '+visitorEmail,botcheck:document.getElementById('ctaHp').checked})});
+    const d=await r.json();
+    if(!r.ok||!d.success) throw new Error('rejected');
+    i.value='';btn.disabled=false;showThanks();
+  }catch(e){
+    i.placeholder='Something went wrong. Please try again.';flash('rgba(224,57,106,0.7)');
+    setTimeout(()=>{i.placeholder='your@company.com'},4000);btn.disabled=false;
+  }
 }
+document.getElementById('ctaEmail').addEventListener('keydown',e=>{if(e.key==='Enter')submitCTA()});
+/* thank-you popup */
+function showThanks(){
+  const m=document.getElementById('thanksModal');
+  m.classList.add('open');m.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('thanksClose').focus(),50);
+}
+function closeThanks(){
+  const m=document.getElementById('thanksModal');
+  m.classList.remove('open');m.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.getElementById('thanksClose').addEventListener('click',closeThanks);
+document.getElementById('thanksModal').addEventListener('click',e=>{if(e.target.id==='thanksModal')closeThanks()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeThanks()});
+
 document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
 
 /* ──────────────────────────────
