@@ -8,7 +8,12 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-56 -56 112 112'%3E%3Crect x='-56' y='-56' width='112' height='112' rx='24' fill='%230F1E35'/%3E%3Ccircle cx='0' cy='0' r='42' fill='none' stroke='white' stroke-width='9'/%3E%3Ccircle cx='-16' cy='-14' r='9' fill='%233B82F6'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-56 -56 112 112'%3E%3Crect x='-56' y='-56' width='112' height='112' rx='24' fill='%230F1E35'/%3E%3Ccircle cx='0' cy='0' r='42' fill='none' stroke='white' stroke-width='9'/%3E%3Ccircle cx='-16' cy='-14' r='9' fill='%233B82F6'/%3E%3C/svg%3E">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0F1E35">
 
 <!-- Open Graph — controls link preview title/description when shared -->
 <meta property="og:title" content="OriginsIQ — AI-Native Travel Intelligence">
@@ -370,6 +375,24 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
   footer{flex-direction:column;align-items:flex-start;gap:14px}
   .f-links{gap:16px}
 }
+
+/* ── EXCURSIONSIQ CLICK-THROUGH (added; no copy changed) — flat pill, no outer glow/shadow ── */
+@keyframes eiqSheen{0%,55%{transform:translateX(-140%) skewX(-20deg)}100%{transform:translateX(260%) skewX(-20deg)}}
+@keyframes eiqPing{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 7px rgba(255,255,255,0)}}
+.eiq-launch{position:relative;display:inline-flex;align-items:center;flex-shrink:0;gap:10px;overflow:hidden;white-space:nowrap;text-decoration:none;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;background:linear-gradient(110deg,#2f6fe0,#4f93ff);border:1px solid rgba(255,255,255,.28);border-radius:999px;transition:gap .25s,background .25s}
+.eiq-launch .lbl{display:inline-flex;align-items:center;gap:inherit;position:relative;z-index:1}
+.eiq-launch::after{content:'';position:absolute;top:0;bottom:0;left:0;width:36%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);animation:eiqSheen 3.6s ease-in-out infinite;pointer-events:none}
+.eiq-launch:hover{gap:16px;background:linear-gradient(110deg,#3b82f6,#6aa6ff)}
+.eiq-launch.sm{font-size:12.5px;padding:8px 18px;gap:8px}
+.eiq-launch.md{font-size:14.5px;padding:15px 30px;gap:12px}
+.nav-links a.eiq-launch{color:#fff}
+.eiq-live-dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:eiqBlink 1.8s ease-in-out infinite}
+@keyframes eiqBlink{0%,100%{opacity:1}50%{opacity:.35}}
+.eiq-intro{border-color:rgba(126,179,255,.42)}
+.eiq-intro>*{position:relative;z-index:1}
+.eiq-intro .eiq-launch{margin-left:auto}
+@media(max-width:768px){.eiq-intro .eiq-launch{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.eiq-launch::after,.eiq-live-dot{animation:none}}
 </style>
 </head>
 <body>
@@ -387,7 +410,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
   <div class="nav-links">
     <a href="#industries">Industries</a>
     <a href="#portfolio">What We Build</a>
-    <a href="#eiq-deep">ExcursionsIQ</a>
+    <a href="https://www.excursionsiq.com" target="_blank" rel="noopener" class="eiq-launch sm"><span class="lbl"><span class="eiq-live-dot"></span>ExcursionsIQ ↗</span></a>
     <a href="#consulting">Advisory</a>
     <a href="#cta">Contact</a>
   </div>
@@ -397,7 +420,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 <div class="nav-drawer" id="drawer">
   <a href="#industries" onclick="closeMenu()">Industries</a>
   <a href="#portfolio" onclick="closeMenu()">What We Build</a>
-  <a href="#eiq-deep" onclick="closeMenu()">ExcursionsIQ</a>
+  <a href="https://www.excursionsiq.com" target="_blank" rel="noopener" onclick="closeMenu()">ExcursionsIQ ↗</a>
   <a href="#consulting" onclick="closeMenu()">Advisory</a>
   <a href="#cta" onclick="closeMenu()">Contact</a>
   <button class="nd-cta" onclick="closeMenu();document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Request Briefing</button>
@@ -419,7 +442,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
       <span style="font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-lt)">Cruise · Resorts · Tours · Excursions</span>
       <div style="height:1px;width:32px;background:rgba(59,130,246,0.35)"></div>
     </div>
-    <p class="hero-sub"><strong>OriginsIQ</strong> builds AI-native platforms for the global travel industry — cruise lines, resorts, tour operators, and shore excursion companies. Our flagship, <strong>ExcursionsIQ</strong>, is the first proof of what that intelligence looks like in production.</p>
+    <p class="hero-sub"><strong>OriginsIQ</strong> builds AI-native platforms for the global travel industry — cruise lines, resorts, tour operators, and shore excursion companies. Our flagship, <a href="https://www.excursionsiq.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(126,179,255,.55)"><strong>ExcursionsIQ</strong></a>, is the first proof of what that intelligence looks like in production.</p>
     <div class="hero-actions">
       <button class="btn-primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">See What We're Building →</button>
       <button class="btn-outline" onclick="document.getElementById('industries').scrollIntoView({behavior:'smooth'})">Our Industries</button>
@@ -464,7 +487,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
         <div>
           <div class="hc-title">Cruise & shore excursions</div>
           <div class="hc-body">Our first vertical, and the proving ground for the platform. Port calls, capacity, allocation, guides, and vendors — running live today.</div>
-          <span class="hc-tag">Live via ExcursionsIQ →</span>
+          <span class="hc-tag"><a href="https://www.excursionsiq.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Live via ExcursionsIQ →</a></span>
         </div>
       </div>
       <div class="hl-card sr d1">
@@ -571,6 +594,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
         <div class="eiq-name">Excursions<span class="iq">IQ</span><span class="eiq-by">Our flagship, in detail</span></div>
         <div class="eiq-desc">The world's first AI-native platform purpose-built for cruise shore excursion operators and brokers. End-to-end intelligence — from the first port call to post-tour reconciliation.</div>
       </div>
+      <a href="https://www.excursionsiq.com" target="_blank" rel="noopener" class="eiq-launch md"><span class="lbl">Enter ExcursionsIQ <span>→</span></span></a>
     </div>
 
     <div class="pain-top" style="margin-bottom:48px">
@@ -671,7 +695,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
         <div>
           <div class="hc-title">Your AI operations partner</div>
           <div class="hc-body">Not a chatbot you query. An AI operations partner who already knows your ports, your tours, your patterns — and speaks up when something needs your attention. She notices what you haven't noticed yet.</div>
-          <span class="hc-tag">Always present. Always thinking. →</span>
+          <span class="hc-tag">Always present. Always thinking. Nothing sends itself. →</span>
         </div>
       </div>
       <div class="hl-card wide sr">
@@ -679,7 +703,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
         <div>
           <div class="hc-title">Enterprise architecture — secure by design</div>
           <div class="hc-body">Multi-tenant isolation. Operators, brokers, and cruise line partners share a platform but never share data. As you grow — more ports, more seasons, more cruise lines — the platform scales without friction, without headcount, without a new implementation project.</div>
-          <span class="hc-tag">Built for the long haul. →</span>
+          <span class="hc-tag">Your data stays yours. Built for the long haul. →</span>
         </div>
       </div>
     </div>
@@ -751,7 +775,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
           <span class="sh-bold">Every port day</span>
           <span class="sh-italic sh-violet">is a revenue event.</span>
         </h2>
-        <p class="section-p sr" style="margin-top:16px">The difference between capturing your full potential and leaving money at the dock comes down to one thing: visibility. ExcursionsIQ gives you complete visibility — across every sailing, every season, in real time. Built by OriginsIQ to capture what generic software leaves behind.</p>
+        <p class="section-p sr" style="margin-top:16px">The difference between capturing your full potential and leaving money at the dock comes down to one thing: visibility. ExcursionsIQ gives you complete visibility — across every sailing, every season, in real time. Built by OriginsIQ to capture what generic software leaves behind. Next: from visibility to margin.</p>
       </div>
       <div class="rev-stats">
         <div class="rev-stat sr">
@@ -785,7 +809,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
     <span class="mani-word mw-mid sr d1">Adapting.</span>
     <span class="mani-word mw-lit sr d2">Delivering.</span>
     <span class="mani-word mw-bright sr d3">With you. Always.</span>
-    <p class="mani-sub sr" style="transition-delay:0.5s">OriginsIQ builds, iterates, and evolves 24/7 — shaped by real operators, real ports, real tours. ExcursionsIQ is what that commitment looks like in production.</p>
+    <p class="mani-sub sr" style="transition-delay:0.5s">OriginsIQ builds, iterates, and evolves 24/7 — shaped by real operators, real ports, real tours. ExcursionsIQ is what that commitment looks like in production. A select group of operators is onboarding now.</p>
   </div>
 </div>
 
@@ -819,7 +843,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
     <div class="f-sub" style="color:var(--blue-lt);opacity:0.7;letter-spacing:0.12em">AI-native travel intelligence</div>
   </div>
   <div class="f-links">
-    <a href="#">ExcursionsIQ</a>
+    <a href="https://www.excursionsiq.com" target="_blank" rel="noopener">ExcursionsIQ</a>
     <a href="#">Advisory</a>
     <a href="#">About OriginsIQ</a>
     <a href="#">Privacy</a>
