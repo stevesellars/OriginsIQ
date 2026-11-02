@@ -565,6 +565,17 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
 .tc-ok{flex-shrink:0;display:inline-flex;animation:tpBlink 2.6s ease-in-out infinite}
 @media(max-width:480px){.tile-chip{font-size:10.5px;padding:8px 10px;left:8px;right:8px;bottom:8px}.tc-track{flex-basis:46px}}
 @media(prefers-reduced-motion:reduce){.tc-live,.tc-pips i.b,.tc-track i,.tc-ok{animation:none}}
+
+/* founders */
+.founders{padding:90px 24px}
+.founders .fw{max-width:900px;margin:0 auto;text-align:center}
+.fcards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;text-align:left}
+.fcard{background:#fff;border:1px solid rgba(37,99,235,.18);border-radius:16px;padding:28px}
+.favatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#fff;background:linear-gradient(135deg,#2563EB,#00A88F);margin-bottom:16px;letter-spacing:.04em}
+.fname{font-size:20px;font-weight:700;color:var(--white);margin-bottom:4px}
+.fco{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#2563EB;margin-bottom:14px}
+.fbio{font-size:14px;line-height:1.7;color:var(--white3)}
+@media(max-width:700px){.fcards{grid-template-columns:1fr}.founders{padding:64px 20px}}
 </style>
 </head>
 <body>
@@ -1019,6 +1030,31 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
   </div>
 </div>
 
+<!-- FOUNDERS -->
+<div class="lt section founders" id="about">
+  <div class="fw">
+    <div class="kicker blue sr">Who's behind OriginsIQ</div>
+    <h2 class="section-h sr" style="margin:0 auto">
+      <span class="sh-bold">Built by people</span>
+      <span class="sh-italic sh-accent">who know the industry.</span>
+    </h2>
+    <div class="fcards">
+      <div class="fcard sr">
+        <div class="favatar">SS</div>
+        <div class="fname">Steve Sellars</div>
+        <div class="fco">Co-Founder</div>
+        <p class="fbio">With over 30 years in technology and more than 25 in cruise, Steve Sellars has designed internet networks for telecom carriers around the world and brought ISP service and Internet Cafés to the entire cruise industry. As a founder of cruise technology companies, he has been the engine behind jackpot gaming and entertainment at sea. His deep understanding of both the technology and the operations of cruise positions him to help organizations harness the power of AI to work smarter, innovate, and drive growth.</p>
+      </div>
+      <div class="fcard sr d1">
+        <div class="favatar">SM</div>
+        <div class="fname">Shannon McKee</div>
+        <div class="fco">Co-Founder</div>
+        <p class="fbio">With over 30 years of experience in the cruise and travel industry, Shannon McKee has held leadership roles both onboard and shoreside with Norwegian Cruise Line. As Founder and President of Access Cruise, she works with cruise lines, ports, destinations, and tour operators worldwide. Her extensive industry relationships and unique understanding of both sides of the business position her to help organizations harness the power of AI to work smarter, innovate, and drive growth.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- CTA -->
 <div class="cta-section" id="cta">
   <div class="tex-bg tex-cta"></div>
@@ -1051,13 +1087,14 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:36px var
   </div>
   <div class="f-links">
     <a href="https://www.excursionsiq.com" target="_blank" rel="noopener">ExcursionsIQ</a>
-    <a href="#">Advisory</a>
-    <a href="#">About OriginsIQ</a>
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
+    <a href="#consulting">Advisory</a>
+    <a href="#about">About OriginsIQ</a>
+    <a href="privacy/">Privacy</a>
+    <a href="terms/">Terms</a>
+    <a href="subprocessors/">Subprocessors</a>
+    <a href="#cta">Contact</a>
   </div>
-  <div class="f-copy">© 2026 OriginasIQ</div>
+  <div class="f-copy">© 2026 OriginsIQ</div>
 </footer>
 <div class="thanks-modal" id="thanksModal" role="dialog" aria-modal="true" aria-labelledby="thanksTitle" aria-hidden="true">
   <div class="thanks-card">
